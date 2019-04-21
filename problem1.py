@@ -24,7 +24,7 @@ def matrix_vector_multiplication(X, y):
     '''
     #########################################
     ## INSERT YOUR CODE HERE
-
+    z = X.dot(y)
     #########################################
     return z
 
