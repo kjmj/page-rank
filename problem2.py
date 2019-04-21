@@ -18,15 +18,10 @@ def compute_P(A):
     '''
     #########################################
     ## INSER YOUR CODE HERE
-
-    # sum of each column of A
-
-
-    # create a diagonal matrix  
-
-
-    # normalize each column of A
-
+    np.seterr(divide='ignore', invalid='ignore')
+    np.fill_diagonal(A, 0)
+    sumCols = A.sum(axis=0)
+    P = A / sumCols
     #########################################
     return P
 
@@ -44,9 +39,7 @@ def random_walk_one_step(P, x_i):
     '''
     #########################################
     ## INSERT YOUR CODE HERE
-
-
-
+    x_i_plus_1 = np.dot(P, x_i)
     #########################################
     return x_i_plus_1
 
@@ -66,13 +59,12 @@ def random_walk(P, x_0, max_steps=10000):
     '''
     #########################################
     ## INSERT YOUR CODE HERE
-
-
-
-
-
-
-
+    x = x_0
+    for n_steps in range(1, max_steps + 1):
+        previous_x = x
+        x = random_walk_one_step(P, previous_x)
+        if np.allclose(x, previous_x):
+            break
     #########################################
 
     return x, n_steps
@@ -96,7 +88,7 @@ def pagerank_v1(A):
     # initialize the score vector with all one values
     num_nodes, _ = A.shape # get the number of nodes (n)
     x_0 =  np.ones((num_nodes,1)) # create an all-one vector of shape (n by 1)
-    
+
     # random walk
     x, n_steps = random_walk(P, x_0)
 

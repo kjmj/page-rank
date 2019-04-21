@@ -1,5 +1,5 @@
 import numpy as np
-from problem4 import pagerank 
+from problem4 import pagerank
 
 #-------------------------------------------------------------------------
 '''
@@ -22,7 +22,7 @@ def import_A(filename ='network.csv'):
     '''
     #########################################
     ## INSERT YOUR CODE HERE
-
+    A = np.asmatrix(np.loadtxt(filename, delimiter=','))
     #########################################
     return A
 
@@ -39,9 +39,7 @@ def score2rank(x):
     '''
     #########################################
     ## INSERT YOUR CODE HERE
-
-
-
+    sorted_ids = list(np.argsort(np.array(x).reshape(-1))[::-1])
     #########################################
     return sorted_ids
 
@@ -61,9 +59,9 @@ def node_ranking(filename = 'network.csv', alpha = 0.95):
                 sorted_ids: the list of node IDs (starting from 0) in descending order of their pagerank scores, a python list of integer values, such as [2,0,1,3].
         
     '''
-    A = import_A(filename) 
+    A = import_A(filename)
     x = pagerank(A,alpha)
-    sorted_ids = score2rank(x) 
+    sorted_ids = score2rank(x)
     return sorted_ids
 
 

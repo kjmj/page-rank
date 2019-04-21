@@ -22,14 +22,19 @@ def compute_S(A):
     '''
     #########################################
     ## INSERT YOUR CODE HERE
+    A = np.asarray(A).T
+    P = np.full_like(A, 0)
+    sink_row = np.full(A.shape[0], 1.0 / A.shape[0])
 
+    for i in range(A.shape[0]):
+        s = float(sum(A[i]))
 
+        if (A[i] == 0).all():
+            P[i] = sink_row
+        else:
+            P[i] = A[i] / s
 
-
-
-
-
-
+    S = np.asmatrix(P.T)
     #########################################
     return S
 

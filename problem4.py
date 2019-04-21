@@ -28,9 +28,11 @@ def compute_G(A, alpha = 0.95):
     '''
     #########################################
     ## INSERT YOUR CODE HERE
+    shape = set(np.shape(A))
+    n = shape.pop()
 
-
-
+    S = compute_S(A)
+    G = alpha * S + (1-alpha)/n * np.ones((n, n))
     #########################################
     return G
 
